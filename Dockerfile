@@ -4,6 +4,16 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 RUN /usr/bin/dnf -y install wget tar
 RUN /usr/bin/dnf -y update && /usr/bin/dnf -y clean all
 
+# Install Oracle Java 8
+ENV JAVA_VER 8
+ENV JAVA_HOME /usr/java/latest
+
+RUN wget --no-cookies --header "Cookie: gpw_e24=xxx; oraclelicense=accept-securebackup-cookie;" http://download.oracle.com/otn-pub/java/jdk/8u40-b26/jdk-8u40-linux-x64.rpm && \
+    /usr/bin/dnf install -y jdk-8u40-linux-x64.rpm && \
+    rm -rf jdk-8u40-linux-x64.rpm && \
+    java -version
+    
+
 ENV TOMCAT_MAJOR_VERSION 8
 ENV TOMCAT_MINOR_VERSION 8.0.23
 ENV CATALINA_HOME /tomcat
